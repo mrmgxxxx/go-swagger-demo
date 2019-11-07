@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+
+package echoserver;
+
+option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
+    info: {
+        title: "EchoServer API说明文档"
+        version : "0.0.1"
+    };
+
+    schemes: HTTP
+    consumes: "application/json"
+    produces: "application/json"
+};
+
+service Echo {
+    rpc Echo(EchoReq) returns (EchoResp) {
+        option (google.api.http) = {
+          post: "/v1/interface/echo"
+          body: "*"
+        };
+        option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+			description: "Echo示例接口"
+            summary: "Echo接口"
+        };
+    }
+}
+
+message EchoReq {
+	option (grpc.gateway.protoc_gen_swagger.options.openapiv2_schema) = {
+		json_schema: {
+			title: "EchoReq"
+			description: "Echo请求"
+			required: ["msg"]
+		}
+        example: { value: '{ "msg": "Hello World!" }' }
+	};
+
+    string msg = 1 [(grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {title: "消息", description: "在这里写字段详细描述文字", max_length: 64}];
+}
+
+message EchoResp {
+	option (grpc.gateway.protoc_gen_swagger.options.openapiv2_schema) = {
+		json_schema: {
+			title: "EchoResp"
+			description: "Echo响应"
+			required: ["msg"]
+		}
+        example: { value: '{ "msg": "hello world!"}' }
+	};
+
+    string msg = 1 [(grpc.gateway.protoc_gen_swagger.options.openapiv2_field) = {title: "消息", description: "在这里写字段详细描述文字"}];
+}

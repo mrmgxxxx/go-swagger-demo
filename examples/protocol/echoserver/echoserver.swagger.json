@@ -1,0 +1,85 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EchoServer API说明文档",
+    "version": "0.0.1"
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/interface/echo": {
+      "post": {
+        "summary": "Echo接口",
+        "description": "Echo示例接口",
+        "operationId": "Echo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/echoserverEchoResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/echoserverEchoReq"
+            }
+          }
+        ],
+        "tags": [
+          "Echo"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "echoserverEchoReq": {
+      "type": "object",
+      "example": {
+        "msg": "Hello World!"
+      },
+      "properties": {
+        "msg": {
+          "type": "string",
+          "description": "在这里写字段详细描述文字",
+          "title": "消息",
+          "maxLength": 64
+        }
+      },
+      "description": "Echo请求",
+      "title": "EchoReq",
+      "required": [
+        "msg"
+      ]
+    },
+    "echoserverEchoResp": {
+      "type": "object",
+      "example": {
+        "msg": "hello world!"
+      },
+      "properties": {
+        "msg": {
+          "type": "string",
+          "description": "在这里写字段详细描述文字",
+          "title": "消息"
+        }
+      },
+      "description": "Echo响应",
+      "title": "EchoResp",
+      "required": [
+        "msg"
+      ]
+    }
+  }
+}
